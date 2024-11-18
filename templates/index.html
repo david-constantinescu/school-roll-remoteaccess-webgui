@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalog Școlar</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Catalog Școlar</h1>
+
+        <div class="form-container">
+            <h2>Adaugă Elev</h2>
+            <form action="/add_student" method="POST">
+                <input type="text" name="name" placeholder="Nume Elev" required>
+                <button type="submit">Adaugă Elev</button>
+            </form>
+        </div>
+
+        <h2>Lista Elevilor</h2>
+        <ul id="student-list">
+            {% for student in students %}
+                <li>
+                    {{ student[1] }} 
+                    <button onclick="viewGrades({{ student[0] }})">Vizualizează Note</button>
+                    <a href="/delete_student/{{ student[0] }}">Șterge</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div class="form-container">
+            <h2>Adaugă Notă</h2>
+            <form action="/add_grade" method="POST">
+                <select name="student_id" required>
+                    <option value="">Selectează Elev</option>
+                    {% for student in students %}
+                        <option value="{{ student[0] }}">{{ student[1] }}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="grade" step="0.01" placeholder="Notă" required>
+                <input type="file" name="pdf_path" placeholder="Selectează PDF" required>
+                <button type="submit">Adaugă Notă</button>
+            </form>
+        </div>
+
+        <h2>Note Elevi</h2>
+        <div id="grades-list"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
