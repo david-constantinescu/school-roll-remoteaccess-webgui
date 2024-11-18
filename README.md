@@ -20,7 +20,7 @@ This project provides a server with a user-friendly web interface to manage and 
      ```bash
     python server.py
 
-## Alternative instalation method
+## Alternative installation method
 
 Alternatively, download a precompiled binary from the releases tab. Windows binaries are available and plans for a macOS on ARM binary are on the way.
 
