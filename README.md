@@ -1,5 +1,3 @@
-Certainly! Here’s the full raw README, based on the version I provided:
-
 # School Roll Remote Access Web GUI
 
 This project provides a server with a user-friendly web interface to manage and edit school grades from the **[School Roll](https://github.com/david-constantinescu/school-roll)**, with a simple HTML, CSS, and JavaScript frontend. It allows users (teachers or administrators) to remotely access and update the school roll data.
@@ -22,7 +20,10 @@ This project provides a server with a user-friendly web interface to manage and 
      ```bash
     python server.py
 
+## Alternative instalation method
 
-Usage
+Alternatively, download a precompiled binary from the releases tab. Windows binaries are available and plans for a macOS on ARM binary are on the way.
 
-Once the server is running, open your browser and go to http://localhost:5000 or https://127.0.0.1:5000 to access the web interface. You’ll be able to securely manage and update grades from the school roll.
+## Usage
+
+Once the server is running, open your browser and go to http://localhost:1509 or https://127.0.0.1:1509 to access the web interface. You’ll be able to securely manage and update grades from the school roll.
