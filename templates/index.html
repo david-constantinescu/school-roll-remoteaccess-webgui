@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalog Școlar - Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Catalog Școlar - Panou Admin</h1>
+
+        <div class="form-container">
+            <h2>Adaugă Elev</h2>
+            <form action="/add_student" method="POST">
+                <input type="text" name="name" placeholder="Nume Elev" required>
+                <button type="submit">Adaugă Elev</button>
+            </form>
+        </div>
+
+        <h2>Lista Elevilor</h2>
+        <ul id="student-list">
+            {% for student in students %}
+                <li>
+                    {{ student['name'] }}
+                    <div class="student-actions">
+                        <a href="{{ url_for('view_grades', student_id=student['id']) }}" class="button">Vizualizează Note</a>
+                        <a href="{{ url_for('delete_student', student_id=student['id']) }}" class="delete-button" 
+                           onclick="return confirm('Ești sigur că vrei să ștergi acest elev?')">Șterge</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div class="action-buttons">
+            <a href="{{ url_for('add_grade') }}" class="button">Adaugă Notă Nouă</a>
+            <a href="{{ url_for('logout') }}" class="logout-button">Deconectare</a>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
