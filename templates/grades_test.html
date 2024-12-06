@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grades/Test</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Grades/Test</h1>
+        {% if error %}
+            <div class="error">
+                <p>{{ error }}</p>
+            </div>
+        {% endif %}
+        {% if result %}
+            <div class="result">
+                <p>{{ result }}</p>
+            </div>
+        {% endif %}
+        
+        <form method="POST" action="{{ url_for('grades_test') }}">
+            <label for="pdf_link">PDF Link (Google Drive/OneDrive):</label>
+            <input type="url" id="pdf_link" name="pdf_link" required>
+            
+            <label for="action">Choose Action:</label>
+            <select id="action" name="action" required>
+                <option value="median">Median</option>
+                <option value="student">Student</option>
+            </select>
+
+            <div id="student_input" style="display: none;">
+                <label for="student_name">Student Name:</label>
+                <input type="text" id="student_name" name="student_name">
+            </div>
+
+            <button type="submit" class="btn">Submit</button>
+        </form>
+        <a href="{{ url_for('admin_dashboard') }}" class="btn">Back to Dashboard</a>
+    </div>
+
+    <script>
+        // Show or hide student input based on action selection
+        const actionSelect = document.getElementById('action');
+        const studentInput = document.getElementById('student_input');
+        actionSelect.addEventListener('change', () => {
+            if (actionSelect.value === 'student') {
+                studentInput.style.display = 'block';
+            } else {
+                studentInput.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

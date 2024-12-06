@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Grades</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Grades for {{ student['name'] }}</h1>
+        
+        {% if graph_html %}
+            <div>
+                <!-- Display the generated bar graph above the grades table -->
+                {{ graph_html | safe }}
+            </div>
+        {% else %}
+            <p>No grades available for graphing.</p>
+        {% endif %}
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Grade</th>
+                    <th>Date</th>
+                    <th>View PDF</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for grade in grades %}
+                <tr>
+                    <td>{{ grade['grade'] }}</td>
+                    <td>{{ grade['date'] }}</td>
+                    <td>
+                        <a href="{{ grade['file_link'] }}" target="_blank" class="btn">View PDF</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ url_for('admin_dashboard') }}" class="btn">Back to Dashboard</a>
+    </div>
+</body>
+</html>

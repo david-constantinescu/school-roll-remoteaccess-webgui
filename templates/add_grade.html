@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Grade</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script>
+        // Automatically set the date field to today's date
+        document.addEventListener('DOMContentLoaded', function () {
+            const dateInput = document.getElementById('date');
+            if (dateInput) {
+                const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
+                dateInput.value = today;
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Add Grade for {{ student_name }}</h1>
+        <form method="POST" action="{{ url_for('add_grade', student_id=student_id) }}">
+            <label for="grade">Grade:</label>
+            <input type="text" id="grade" name="grade" required>
+            
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+            
+            <label for="file_link">File Link (Google Drive/OneDrive):</label>
+            <input type="url" id="file_link" name="file_link" required>
+            
+            <button type="submit" class="btn">Add Grade</button>
+        </form>
+        <a href="{{ url_for('admin_dashboard') }}" class="btn">Back to Dashboard</a>
+    </div>
+</body>
+</html>
